@@ -1,0 +1,24 @@
+.picture {
+	width: 49px;
+	height: 49px;
+	object-fit: cover;
+	border-radius: 5px;
+}
+
+.greenCircleOn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	background-color: var(--gray2);
+	border: solid var(--green2) 2px;
+	border-radius: 8px;
+}
+.greenCircleOff {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+}

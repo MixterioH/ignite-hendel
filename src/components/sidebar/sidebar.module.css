@@ -1,0 +1,68 @@
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 256px;
+	height: 294px;
+	background-color: var(--gray2);
+}
+
+.banner {
+	height: 72px;
+	overflow: hidden;
+	object-fit: cover;
+}
+
+.banner_image {
+}
+.info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transform: translateY(-30px);
+	text-align: center;
+	padding-bottom: 24px;
+	border-bottom: 1px solid var(--gray3);
+	width: 100%;
+}
+
+.info_picture {
+	margin-bottom: 16px;
+}
+
+.info .name {
+	font-weight: var(--font_bold);
+}
+
+.info .job {
+	font-size: 1.4rem;
+	color: var(--gray5);
+}
+
+.edit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.edit button {
+	border: 1px solid var(--green2);
+	border-radius: 8px;
+	height: 50px;
+	max-width: 192px;
+	width: 100%;
+	padding: 0 8px;
+}
+
+.edit button span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: var(--font_bold);
+	color: var(--green2);
+}
+
+.edit button span svg {
+	color: var(--green2);
+	margin-right: 10px;
+}

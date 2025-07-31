@@ -1,27 +1,56 @@
 import S from "./sidebar.module.css"
 import { Avatar } from "../avatar/avatar"
+import { useState } from "react"
+import { EditUser } from "../editUser/editUser"
 
-type SidebarProps = {
-	picture: string
+type UserData = {
+	user: {
+		userBanner: string
+		userName: string
+		userAvatarUrl: string
+		userRole: string
+	}
 }
 
-export function Sidebar({ picture }: SidebarProps) {
+type SidebarProps = {
+	userData: UserData
+	setUserData: React.Dispatch<React.SetStateAction<UserData>>
+	setNoScroll: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export function Sidebar({ setNoScroll, userData, setUserData }: SidebarProps) {
+	const [showEdit, setShowEdit] = useState(false)
+
+	function setShowEditFalse() {
+		setShowEdit(false)
+	}
+
 	return (
 		<aside className={S.sidebar}>
 			<div className={S.banner}>
-				<img className={S.banner_image} src={picture} alt='' />
+				<img className={S.banner_image} src={userData.user.userBanner} alt='' />
 			</div>
 
 			<div className={S.info}>
 				<div className={S.info_picture}>
-					<Avatar Owner={true} picture={picture} />
+					<Avatar Owner={true} picture={userData.user.userAvatarUrl} />
 				</div>
 
-				<p className={S.name}>Name</p>
-				<p className={S.job}>trabalho</p>
+				<p className={S.name}>{userData.user.userName}</p>
+				<p className={S.job}>{userData.user.userRole}</p>
 			</div>
 
-			<div className={S.edit}>
+			<div
+				onClick={() => {
+					if (showEdit) {
+						setShowEdit(false)
+					} else {
+						setShowEdit(true)
+						setNoScroll(true)
+					}
+				}}
+				className={S.edit}
+			>
 				<button>
 					<img src='' alt='' />
 					<span>
@@ -38,6 +67,15 @@ export function Sidebar({ picture }: SidebarProps) {
 					</span>
 				</button>
 			</div>
+
+			{showEdit && (
+				<EditUser
+					setNoScroll={setNoScroll}
+					setUserData={setUserData}
+					setShowEditFalse={setShowEditFalse}
+					userData={userData}
+				/>
+			)}
 		</aside>
 	)
 }

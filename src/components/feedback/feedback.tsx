@@ -76,7 +76,7 @@ export function Feedback({
 
 	return (
 		<div className={S.container}>
-			<Avatar picture={commentAvatarUrl} />
+			<Avatar Owner picture={commentAvatarUrl} />
 			<div className={S.feedback_box}>
 				<div className={S.feedback_section1}>
 					<div className={S.info}>

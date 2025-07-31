@@ -1,0 +1,54 @@
+.background {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: #00000075;
+	top: 0;
+	left: 0;
+}
+
+.form form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); /* centraliza */
+	max-width: 300px;
+	display: flex;
+	flex-direction: column;
+	padding: 32px;
+	background-color: var(--gray2);
+	border-radius: 8px;
+}
+
+.form p {
+	font-size: 1.4rem;
+	color: var(--gray6);
+}
+
+.form input {
+	color: var(--gray6);
+	background-color: var(--gray1);
+	border-radius: 8px;
+	padding: 8px;
+}
+
+.form input:focus {
+	outline: none;
+	border: 1px solid var(--green2);
+}
+
+.form p:first-child {
+	margin-bottom: 8px;
+	color: var(--gray7);
+	font-weight: var(--font_bold);
+	font-size: 2.4rem;
+	text-align: center;
+}
+
+.form button {
+	background-color: var(--gray8);
+	border-radius: 8px;
+	width: 138px;
+	color: var(--green2);
+	margin: 16px auto 0 auto;
+}

@@ -37,6 +37,12 @@ type PostProps = {
 		React.SetStateAction<{ [postId: number]: CommentType[] }>
 	>
 	postId: number
+	userData: {
+		user: {
+			userAvatarUrl: string
+			userName: string
+		}
+	}
 }
 
 export function Post({
@@ -50,6 +56,7 @@ export function Post({
 	handleCreateNewComment,
 	setCommentsByPostId,
 	postId,
+	userData,
 }: PostProps) {
 	const publishedDateFormated = format(time, "d 'de' LLLL 'às' HH:mm'h'", {
 		locale: ptBR,
@@ -63,9 +70,8 @@ export function Post({
 		const newComment: CommentType = {
 			info: {
 				id: Date.now() + Math.random(),
-				commentAvatarUrl:
-					"https://avatars.githubusercontent.com/u/37636267?v=4",
-				commentName: "usuário",
+				commentAvatarUrl: userData.user.userAvatarUrl,
+				commentName: userData.user.userName,
 				commentPublishedAt: new Date(),
 				commentContent: newCommentText,
 				likes: 0,

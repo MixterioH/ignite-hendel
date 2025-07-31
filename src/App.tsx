@@ -3,7 +3,7 @@ import S from "./App.module.css"
 import { Header } from "./components/header/header"
 import { Post } from "./components/post/post"
 import { Sidebar } from "./components/sidebar/sidebar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 type Author = {
 	name: string
@@ -41,14 +41,23 @@ type CommentsByPostId = {
 	[postId: number]: CommentType[]
 }
 
+type UserData = {
+	user: {
+		userAvatarUrl: string
+		userName: string
+		userBanner: string
+		userRole: string
+	}
+}
+
 // ----------------------------
 
 const posts: PostType[] = [
 	{
 		id: 1,
 		author: {
-			name: "hendel",
-			role: "front end junior",
+			name: "Pedrinho",
+			role: "Programador Front End",
 			avatarUrl: "https://avatars.githubusercontent.com/u/37636267?v=4",
 			backgroundUrl:
 				"https://images.unsplash.com/photo-1752503650851-cbc3f8b00679?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -69,7 +78,26 @@ const posts: PostType[] = [
 // ----------------------------
 
 export function App() {
+	const [noScroll, setNoScroll] = useState<boolean>(false)
+	const [userData, setUserData] = useState<UserData>({
+		user: {
+			userAvatarUrl: "https://avatars.githubusercontent.com/u/37636267?v=4",
+			userName: "Hendel",
+			userBanner:
+				"https://images.unsplash.com/photo-1752517656908-b7285e491bc3?q=80&w=1418&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+			userRole: "Programador Front End",
+		},
+	})
 	const [commentsByPostId, setCommentsByPostId] = useState<CommentsByPostId>({})
+
+	// Controla scroll e barra
+	useEffect(() => {
+		if (noScroll) {
+			document.body.classList.add("no-scroll", "no-scrollbar")
+		} else {
+			document.body.classList.remove("no-scroll", "no-scrollbar")
+		}
+	}, [noScroll])
 
 	function handleCreateNewComment(postId: number, newComment: CommentType) {
 		setCommentsByPostId((prev) => ({
@@ -81,8 +109,13 @@ export function App() {
 	return (
 		<>
 			<Header />
+
 			<div className={S.wrapper}>
-				<Sidebar picture='https://images.unsplash.com/photo-1752517656908-b7285e491bc3?q=80&w=1418&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' />
+				<Sidebar
+					setNoScroll={setNoScroll}
+					userData={userData}
+					setUserData={setUserData}
+				/>
 				<main className={S.main}>
 					{posts.map((item) => (
 						<Post
@@ -91,7 +124,6 @@ export function App() {
 							time={item.publishedAt}
 							job={item.author.role}
 							name={item.author.name}
-							Owner
 							postId={item.id}
 							picture={item.author.avatarUrl}
 							comment={commentsByPostId[item.id] || []}
@@ -99,6 +131,7 @@ export function App() {
 								handleCreateNewComment(item.id, newComment)
 							}
 							setCommentsByPostId={setCommentsByPostId}
+							userData={userData}
 						/>
 					))}
 				</main>

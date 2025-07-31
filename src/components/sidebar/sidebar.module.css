@@ -32,6 +32,7 @@
 
 .info .name {
 	font-weight: var(--font_bold);
+	color: var(--gray7);
 }
 
 .info .job {

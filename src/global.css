@@ -42,9 +42,17 @@ html {
 	}
 }
 
+::-webkit-scrollbar {
+	display: none;
+}
+
 body {
 	height: 100vh;
 	background-color: var(--gray1);
+}
+
+.no-scroll {
+	overflow: hidden;
 }
 
 body,
@@ -52,6 +60,7 @@ input,
 textarea,
 button,
 pre {
+	box-sizing: border-box;
 	font-family: "Roboto", sans-serif;
 	font-size: 1.6rem;
 	color: var(--white);
@@ -120,4 +129,9 @@ pre {
 	white-space: pre-wrap;
 	font-family: inherit;
 	word-break: break-word;
+}
+
+input {
+	color: black;
+	box-sizing: border-box;
 }
